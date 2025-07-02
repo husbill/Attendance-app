@@ -1,4 +1,4 @@
-const pupils = ["Amina Yusuf", "Chinedu Obi", "Zainab Musa", "John Paul"]; // Customize this list
+const pupils = ["Amina Yusuf", "Chinedu Obi", "Zainab Musa", "John Paul"]; // ✅ Semicolon added
 
 const dateEl = document.getElementById("date");
 dateEl.textContent = new Date().toLocaleDateString();
@@ -22,6 +22,7 @@ pupils.forEach((name, index) => {
 
 document.getElementById("attendance-form").addEventListener("submit", function (e) {
   e.preventDefault();
+
   const data = pupils.map((name, index) => {
     const status = document.querySelector(`select[name="status-${index}"]`).value;
     return {
@@ -31,6 +32,22 @@ document.getElementById("attendance-form").addEventListener("submit", function (
     };
   });
 
-  console.log("Attendance Submitted:", data);
-  alert("Attendance submitted! (Check console for now)");
+  fetch("https://script.google.com/macros/s/AKfycbwfgPprUfBc2enp-uENeURSpFs8CT6kLuQRA6ayZKlA3TA4aa91-cRenXd_mLpX2cdy/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(response => {
+    if (response.status === "success") {
+      alert("✅ Attendance saved successfully!");
+    } else {
+      alert("❌ Error: " + response.message);
+    }
+  })
+  .catch(err => {
+    alert("❌ Network error: " + err.message);
+  });
 });
