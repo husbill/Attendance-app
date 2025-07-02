@@ -32,7 +32,7 @@ document.getElementById("attendance-form").addEventListener("submit", function (
     };
   });
 
-  fetch("https://script.google.com/macros/s/AKfycbwfgPprUfBc2enp-uENeURSpFs8CT6kLuQRA6ayZKlA3TA4aa91-cRenXd_mLpX2cdy/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxjcEA-Bh6yl1KPx1coLtaFK-VNGeI3um4JBlcBSQZXt-eniv9M6PBoPuuyYvbGdXwJ/exec", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
